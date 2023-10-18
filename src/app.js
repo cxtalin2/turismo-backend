@@ -1,10 +1,14 @@
+require( 'dotenv' ).config();
+
 const express = require( 'express' );
 const { dbConection } = require('./config/mongo.config');
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 dbConection();
 
-app.listen( 3000, function() {
-    console.log( `Servidor escuchando en http://localhost:3000` );
+app.listen( PORT, function() {
+    console.log( `Servidor escuchando en http://localhost:${ PORT }` );
 } );
 
