@@ -1,4 +1,7 @@
 const { Router } = require( 'express' );    // Importa el Router de Express
+
+const { getAll, getById, create, updateById, removeById } = require('../controllers/product.controller');
+
 const router = Router();                    // Invoca el Router de Express
 
 /** Establece Rutas para productos
@@ -6,46 +9,23 @@ const router = Router();                    // Invoca el Router de Express
  */
 router.get( 
     '/',                            // http://localhost:4000/api/products/
-    function( req, res ) {          // Define funcionalidad
-        const msg = 'Obtener todos los productos';
-
-        console.log({ msg });         // Mostrar mensaje en la terminal
-        res.json({ msg });          // Mostrar un objeto JSON en el navegador
-    });
+    getAll                          // Invoca a la funcionalidad del controlador
+);
 
 // Obtenemos un producto por ID
 router.get( 
     '/:id',                         // http://localhost:4000/api/products/<product=id> (Parametrizar la ruta 'id')
-    function( req, res ) {
-        const msg = 'Obtiene un producto por ID';
-
-        console.log({ msg });
-        res.json({ msg });
-    } );
+    getById
+);
 
 // Crea un producto
-router.post( '/', function( req, res ) {
-    const msg = 'Crea un producto';
-
-    console.log({ msg });
-    res.json({ msg });
-});
+router.post( '/', create );
 
 // Elimina un producto
-router.delete( '/:id', function( req, res ) {
-    const msg = 'Elimina un producto';
-
-    console.log({ msg });
-    res.json({ msg });
-} );
+router.delete( '/:id', removeById );
 
 // Actualiza un producto
-router.patch( '/:id', function( req, res ) {
-    const msg = 'Actualiza un producto';
-
-    console.log({ msg });
-    res.json({ msg });
-} );
+router.patch( '/:id', updateById );
 
 
 module.exports = router;                    // Expone el router para que sea usado por otros archivos
