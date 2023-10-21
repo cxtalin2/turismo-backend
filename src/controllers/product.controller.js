@@ -1,4 +1,4 @@
-const { registerProduct, getAllProducts, getOneProductById } = require("../services/product.service");
+const { registerProduct, getAllProducts, getOneProductById, removeOneProductById } = require("../services/product.service");
 
 
 const createProduct = async ( req, res ) => {
@@ -59,7 +59,28 @@ const getProductById = async ( req, res ) => {
    
 }
 
+const removeProductById = async ( req, res ) => {
+    const product_id = req.params.id;
+
+    try {
+        const data = await removeOneProductById( product_id );
+        
+        res.json({ ok: true, data });
+    } 
+    catch( error ) {
+        console.error( error );
+        res.json({
+            ok: false,
+            msg: 'Error al eliminar un producto por ID'
+        })
+    }
+    
+}
+
 
 module.exports = {
-    createProduct, getProducts, getProductById
+    createProduct, 
+    getProducts, 
+    getProductById,
+    removeProductById
 }

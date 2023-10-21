@@ -10,9 +10,17 @@ async function getAllProducts() {
 
 async function getOneProductById( id ) {
     return await ProductModel.findById( id );
+    //return await ProductModel.find({ _id: id });
+}
+
+async function removeOneProductById( id ) {
+    return await ProductModel.findOneAndRemove({ _id: id });
 }
 
 
 module.exports = {
-    registerProduct, getAllProducts, getOneProductById
+    registerProduct, 
+    getAllProducts, 
+    getOneProductById,
+    removeOneProductById
 }
