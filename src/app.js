@@ -6,6 +6,8 @@ const app = express();                                      // Asigna invocacion
 
 const PORT = process.env.PORT || 3000;                      // Define el puerto a traves de la variable de entorno
 
+app.use( express.json() );
+
 /** Establece Rutas de la aplicacion */
 app.use(
     '/api/products',                        // Middleware que configura la ruta
