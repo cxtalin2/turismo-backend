@@ -1,4 +1,4 @@
-const { registerProduct, getAllProducts } = require("../services/product.service");
+const { registerProduct, getAllProducts, getOneProductById } = require("../services/product.service");
 
 
 const createProduct = async ( req, res ) => {
@@ -44,7 +44,22 @@ const getProducts = async ( req, res ) => {
     
 }
 
+const getProductById = async ( req, res ) => {
+    const product_id = req.params.id;
+
+    try {
+        const data = await getOneProductById( product_id );
+
+        res.json({ ok: true, data });
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({ ok: false, msg: 'Error al obtener un producto por ID' })
+    }
+   
+}
+
 
 module.exports = {
-    createProduct, getProducts
+    createProduct, getProducts, getProductById
 }

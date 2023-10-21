@@ -1,7 +1,7 @@
 const { Router } = require( 'express' );    // Importa el Router de Express
 const router = Router();                    // Invoca el Router de Express
 
-const { createProduct, getProducts } = require('../controllers/product.controller');
+const { createProduct, getProducts, getProductById } = require('../controllers/product.controller');
 
 
 /** Definicion de rutas para products 
@@ -9,6 +9,7 @@ const { createProduct, getProducts } = require('../controllers/product.controlle
 */
 router.post( '/', createProduct );   // Crea un producto
 router.get( '/', getProducts );      // Obtener todos los productos
+router.get( '/:id', getProductById );// Obtener un producto por ID
 
 
 module.exports = router;                    // Expone el router para que sea usado por otros archivos
