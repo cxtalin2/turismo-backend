@@ -1,4 +1,4 @@
-const { registerProduct, getAllProducts, getOneProductById, removeOneProductById } = require("../services/product.service");
+const { registerProduct, getAllProducts, getOneProductById, removeOneProductById, updateOneProductById } = require("../services/product.service");
 
 
 const createProduct = async ( req, res ) => {
@@ -77,10 +77,29 @@ const removeProductById = async ( req, res ) => {
     
 }
 
+const updateProductById = async ( req, res ) => {
+    const product_id = req.params.id;   // Obtener el ID de la ruta
+    const inputData = req.body;         // Obtener el body del Request
+
+    try {
+        const updatedProduct = await updateOneProductById( product_id, inputData );  // Vincula al Servicio para actualizar producto
+
+        res.json({
+            ok: true,
+            updatedProduct
+        });
+    } 
+    catch ( error ) {
+        console.error( error );
+        res.json({ ok: false, msg: 'Error al actualizar producto por ID' })
+    }
+}
+
 
 module.exports = {
     createProduct, 
     getProducts, 
     getProductById,
-    removeProductById
+    removeProductById,
+    updateProductById
 }
