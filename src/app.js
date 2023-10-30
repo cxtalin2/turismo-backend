@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;                      // Define el puerto 
 app.use( express.json() );
 
 /** Establece Rutas de la aplicacion */
+app.use( '/api/auth', require( './routes/auth.routes' ) );
 app.use(
     '/api/products',                        // Middleware que configura la ruta
     require( './routes/products.routes' )   // Importa el archivo de rutas para esta ruta '/api/products'
