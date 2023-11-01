@@ -37,7 +37,7 @@ const login = async ( req, res ) => {
     const { username, password } = req.body;         // { 'username': '', password: '', role: '' }
 
     // 2. Verificar si el usuario existe (username ==> email)
-    const userFound = await UserModel.findOne({ username });
+    const userFound = await findUserByUsername( username );
 
     if( ! userFound ) {
         return res.status( 400 ).json({
