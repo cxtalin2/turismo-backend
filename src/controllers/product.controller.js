@@ -26,6 +26,8 @@ const createProduct = async ( req, res ) => {
 
 const getProducts = async ( req, res ) => {
 
+    console.log( req.authUser );
+
     try {
         const data = await getAllProducts();
 

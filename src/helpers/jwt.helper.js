@@ -1,4 +1,4 @@
-const { sign } = require("jsonwebtoken");
+const { sign, verify } = require("jsonwebtoken");
 
 
 const generateToken = ( payload ) => {
@@ -9,7 +9,15 @@ const generateToken = ( payload ) => {
     );
 }
 
+const validateToken = ( token ) => {
+    return verify(
+        token,                          // Token
+        process.env.SECRET_JWT_SEED     // PALABRA CLAVE
+    );
+}
+
 
 module.exports = {
-    generateToken
+    generateToken,
+    validateToken
 }
