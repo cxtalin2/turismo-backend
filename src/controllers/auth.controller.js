@@ -1,9 +1,9 @@
 const { compareSync } = require("bcrypt");
-const { sign } = require("jsonwebtoken");
 
 const UserModel = require("../models/User");
 
 const { findUserByUsername, registerUser } = require('../services/auth.service');
+const { generateToken } = require("../helpers/jwt.helper");
 
 
 const register = async ( req, res ) => {
@@ -57,18 +57,14 @@ const login = async ( req, res ) => {
     }
 
     // 4. Generar una autenticacion pasiva (token)
-    const payload = { username: userFound.username };
+    const payload = { 
+        uid: userFound.id,
+        username: userFound.username 
+    };
 
-    const token = sign(
-        payload,                            // PayLoad
-        'lowngrfiurtkj',                    // PALABRA-CLAVE
-        { expiresIn: '1h' }                 // Configuracion
-    );
-
-    console.log( token );
+    const token = generateToken( payload );
 
     // 5. Responder al Cliente enviandole el Token
-
     res.status( 200 ).json({
         ok: true,
         token
