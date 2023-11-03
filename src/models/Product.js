@@ -25,7 +25,7 @@ const ProductSchema = new Schema({
     urlImage: String,   // El URL de la imagen del producto
     userId: {           // El creador del producto
         type: String,
-        required: false
+        required: true
     }
 }, {
     // Define las configuraciones que deseamos para aplicar a este objeto en Mongoose 

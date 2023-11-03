@@ -3,8 +3,12 @@ const { registerProduct, getAllProducts, getOneProductById, removeOneProductById
 
 const createProduct = async ( req, res ) => {
     const inputData = req.body;
+    const payload = req.authUser;   // Obtenemos el payload desde middleware
 
     console.log( inputData );
+    console.log( payload );
+
+    inputData.userId = payload.uid; // Asignamos a la data el ID del usuario
 
     try {
         const data = await registerProduct( inputData );    
