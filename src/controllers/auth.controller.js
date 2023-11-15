@@ -71,8 +71,33 @@ const login = async ( req, res ) => {
     });
 }
 
+const renewToken = ( req, res ) => {
+    const token = req.authUser;
+    const { uid, username } = token;
+
+    // Verificar que existe el usuario
+    const userFound = UserModel.findById( uid );
+    
+    if( ! userFound ) {
+        res.status( 400 ).json({
+            ok: false,
+            msg: 'El usuario no existe, no renueva el token'
+        });
+    }
+
+    // Generar nuevo token
+    const newToken = generateToken({ uid, username });    
+
+    res.status( 200 ).json({ 
+        ok: true,
+        token: newToken
+    });
+}
+
+
 
 module.exports = {
     login,
-    register
+    register,
+    renewToken
 }
