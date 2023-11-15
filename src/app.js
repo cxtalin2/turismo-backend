@@ -3,9 +3,13 @@ require( 'dotenv' ).config();                               // Importa dependenc
 const express = require( 'express' );                       // Importa Express crea infraestructura, rutas, responde a peticiones
 const { dbConection } = require('./config/mongo.config');   // Importa configuracion de DB para Mongo usando Mongoose
 const app = express();                                      // Asigna invocacion de Express
+const cors = require( 'cors' );                             // CORS: Permisiona el acceso a peticiones de aplicaciones externas
+
 
 const PORT = process.env.PORT || 3000;                      // Define el puerto a traves de la variable de entorno
 
+
+app.use( cors() );
 app.use( express.json() );
 
 /** Establece Rutas de la aplicacion */
