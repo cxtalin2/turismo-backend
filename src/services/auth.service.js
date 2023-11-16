@@ -15,7 +15,12 @@ function registerUser ( newUser ) {
 
 async function findUserByUsername( username ) {
 
-    return await UserModel.findOne({ username });         // Equivale a: UserModel.find({ username: username });  
+    return await UserModel.findOne({ username }, {
+        // Restricciones: No retornar las siguientes propiedades y sus valores
+        createdAt: 0,
+        updatedAt: 0,
+        __v: 0
+    });         // Equivale a: UserModel.find({ username: username });  
 }
 
 
