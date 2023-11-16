@@ -56,11 +56,16 @@ const login = async ( req, res ) => {
         });
     }
 
+    // userFound: Objeto JavaScript Mongoose, no se puede eliminar sus propiedades como normalmente lo hariamos con un Onjeto JavaScript
+    // { _id: '', username: '', name: '', password: '', role: '', createAt: '', updateAt: '', __v: '' }
+    const userData = userFound.toObject();  // Convierte un objeto de Monogoose a un Objeto Literal
+    delete userData.password;               // Elimina la propiedad password
+
+    // { _id: '', username: '', name: '', role: '' }
+    console.log( userData );
+
     // 4. Generar una autenticacion pasiva (token)
-    const payload = { 
-        uid: userFound.id,
-        username: userFound.username 
-    };
+    const payload = { ...userData };       // uid, username, name, role (Desestructurando objeto userData)
 
     const token = generateToken( payload );
 
@@ -72,11 +77,15 @@ const login = async ( req, res ) => {
 }
 
 const renewToken = ( req, res ) => {
-    const token = req.authUser;
-    const { uid, username } = token;
+    const userData = req.authUser;
+    const { id } = userData;
+
+    // Elimina las propiedades adicionales agregadas en el Token
+    delete userData.iat;
+    delete userData.exp;
 
     // Verificar que existe el usuario
-    const userFound = UserModel.findById( uid );
+    const userFound = UserModel.findById( id );
     
     if( ! userFound ) {
         res.status( 400 ).json({
@@ -86,11 +95,12 @@ const renewToken = ( req, res ) => {
     }
 
     // Generar nuevo token
-    const newToken = generateToken({ uid, username });    
+    const newToken = generateToken({ ...userData });    // uid, username, name, role (Desestructurando objeto userData)
 
     res.status( 200 ).json({ 
         ok: true,
-        token: newToken
+        token: newToken,
+        userData
     });
 }
 
