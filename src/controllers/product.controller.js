@@ -8,7 +8,12 @@ const createProduct = async ( req, res ) => {
     console.log( inputData );
     console.log( payload );
 
-    inputData.userId = payload.uid; // Asignamos a la data el ID del usuario
+    // Valida si la categoria fue pasada como una cadena vacia
+    if( inputData?.category?.length == 0 ) {
+        delete inputData.category;
+    }
+
+    inputData.userId = payload._id; // Asignamos a la data el ID del usuario
 
     try {
         const data = await registerProduct( inputData );    
