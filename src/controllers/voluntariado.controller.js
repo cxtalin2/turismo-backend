@@ -3,6 +3,9 @@ const { registrarVoluntariado, obtenerTodosVoluntariados, obtenerVoluntariadoPor
 const createVoluntariado = async ( req, res ) => {
 
     const inputData = req.body;
+    const payload = req.authUser;
+
+    inputData.userId = payload._id
 
     try {
         const data = await registrarVoluntariado( inputData );
@@ -23,7 +26,7 @@ const getAllVoluntariados = async ( req, res ) => {
         res.json({ ok: true, data })
     } catch (error) {
         console.log( error );
-        res.json({ ok: false, msg: 'Error al crear el Voluntariado' })
+        res.json({ ok: false, msg: 'Error al traer los Voluntariados' })
     }
 
 }

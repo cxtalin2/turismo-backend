@@ -8,14 +8,18 @@ const PlanSchema = new Schema({
     description: {
         type: String
     },
-    price: {
+    location: {
+        type: String        
+    },
+    type: {
         type: String,
-        default: 0
+        required: true,
+        default: 'Nacional'
     },
     category: {
         type: String,
         required: true,
-        default: 'non-category'
+        default: 'Normal'
     },
     urlImage: String,   
     userId: {           

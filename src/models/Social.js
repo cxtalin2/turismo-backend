@@ -1,6 +1,6 @@
 const { Schema, model } = require( 'mongoose' );
 
-const VoluntariadoSchema = new Schema({
+const SocialSchema = new Schema({
     name: {
         type: String
     },
@@ -16,19 +16,14 @@ const VoluntariadoSchema = new Schema({
         required: true,
         default: 'non-category'
     },
-    urlImage: String, 
-    userId: {          
-        type: String,
-        required: true
-    }
+    urlImage: String
 }, {
     timestamps: true
 });
 
-
-const VoluntariadoModel = model(
-    'Voluntariado',
-    VoluntariadoSchema
+const SocialModel = model(
+    'Social',
+    SocialSchema
 );
 
-module.exports = VoluntariadoModel;
+module.exports = SocialModel

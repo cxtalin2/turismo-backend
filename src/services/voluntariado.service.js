@@ -9,7 +9,7 @@ async function obtenerTodosVoluntariados()  {
 }
 
 async function obtenerVoluntariadoPorId( id ) {
-    return await VoluntariadoModel.find({ _id: id })
+    return await VoluntariadoModel.findById({ _id: id })
 }
 
 async function eliminarVoluntariadoPorId( id ) {
