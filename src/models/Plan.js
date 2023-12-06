@@ -1,7 +1,6 @@
 const { Schema, model } = require( 'mongoose' );
 
 const PlanSchema = new Schema({
-    // Define las propiedades de la Entidad
     name: {
         type: String
     },
@@ -11,15 +10,13 @@ const PlanSchema = new Schema({
     location: {
         type: String        
     },
-    type: {
-        type: String,
-        required: true,
-        default: 'Nacional'
+    price: {
+        type: String
     },
     category: {
         type: String,
         required: true,
-        default: 'Normal'
+        default: 'Local'
     },
     urlImage: String,   
     userId: {           

@@ -4,17 +4,14 @@ const { registrarPlan, obtenerPlanes, obtenerPlanPorId, eliminarPlanPorId, actua
 
 const createPlan = async ( req, res ) => {
     const inputData = req.body;
-    const payload = req.authUser;  
+    const payload = req.authUser;
 
-    console.log( '>>>>', inputData );
-    console.log( payload );
+    inputData.userId = payload._id
 
  
     if( inputData?.category?.length == 0 ) {
         delete inputData.category;
     }
-
-    inputData.userId = payload._id; 
 
     try {
         const data = await registrarPlan( inputData );    
