@@ -23,6 +23,8 @@ app.use( '/api/categories', require( './routes/category.routes' ) );
 app.use( '/api/planes', require('./routes/planes.routes') );
 app.use( '/api/voluntariado', require('./routes/voluntariado.routes') );
 
+app.use( '/api/reservas', require('./routes/reservas.routes') );
+
 dbConection();      // Invoca la configuracion de DB, es decir: Pone a funcionar la BD
 createDefaultUsers();
 
