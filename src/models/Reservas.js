@@ -16,6 +16,9 @@ const ReservasSchema = new Schema({
     },
     quantity: {
         type: String
+    },
+    notes: {
+        type: String
     }
 })
 
