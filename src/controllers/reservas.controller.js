@@ -20,7 +20,7 @@ const createReserva = async ( req, res ) => {
     }
 }
 
-const getReserva = async ( req, res ) => {
+const getReservas = async ( req, res ) => {
 
     try {
         const data = await obtenerReservas();
@@ -40,5 +40,5 @@ const getReserva = async ( req, res ) => {
 }
 module.exports = {
     createReserva,
-    getReserva
+    getReservas
 }
