@@ -1,4 +1,4 @@
-const { registarReserva, obtenerReservas } = require("../services/reservas.service");
+const { registarReserva, obtenerReservas, eliminarReservaPorId } = require("../services/reservas.service");
 
 const createReserva = async ( req, res ) => {
     const inputData = req.body; 
@@ -38,7 +38,27 @@ const getReservas = async ( req, res ) => {
         })
     }
 }
+
+const removeReservaById = async ( req, res ) => {
+    const reserva_id = req.params.id;
+
+    try {
+        const data = await eliminarReservaPorId( reserva_id );
+        
+        res.status( 204 ).json({ ok: true, data });
+    } 
+    catch( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al eliminar un plan por ID'
+        })
+    }
+    
+}
+
 module.exports = {
     createReserva,
-    getReservas
+    getReservas,
+    removeReservaById
 }
