@@ -19,6 +19,10 @@ const ReservasSchema = new Schema({
     },
     notes: {
         type: String
+    },
+    total: {
+        type: Number, 
+        default: 0
     }
 })
 

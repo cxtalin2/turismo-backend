@@ -11,7 +11,8 @@ const PlanSchema = new Schema({
         type: String        
     },
     price: {
-        type: String
+        type: Number, 
+        default: 0
     },
     category: {
         type: String,

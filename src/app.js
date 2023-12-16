@@ -26,7 +26,7 @@ app.use( '/api/voluntariado', require('./routes/voluntariado.routes') );
 app.use( '/api/reservas', require('./routes/reservas.routes') );
 
 dbConection();      // Invoca la configuracion de DB, es decir: Pone a funcionar la BD
-createDefaultUsers();
+//createDefaultUsers();
 
 /** Lanza un Servidor web usando Express en el puerto que se le indique a la variable de entorno PORT */
 app.listen( PORT, function() {
