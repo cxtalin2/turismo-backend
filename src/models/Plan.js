@@ -23,6 +23,10 @@ const PlanSchema = new Schema({
     userId: {           
         type: String,
         required: true
+    },
+    highlight: {
+        type: Boolean,
+        default: false
     }
 }, {
     // Define las configuraciones que deseamos para aplicar a este objeto en Mongoose 
