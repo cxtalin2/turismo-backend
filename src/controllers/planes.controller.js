@@ -1,4 +1,4 @@
-const { registrarPlan, obtenerPlanes, obtenerPlanPorId, eliminarPlanPorId, actualizarPlanPorId } = require("../services/planes.service");
+const { registrarPlan, obtenerPlanes, obtenerPlanPorId, eliminarPlanPorId, actualizarPlanPorId, obtenerPlanesPaginados } = require("../services/planes.service");
 
 
 
@@ -37,6 +37,29 @@ const obtenerTodos = async ( req, res ) => {
 
     try {
         const data = await obtenerPlanes();
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });
+    } 
+    catch( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al obtener todos los planes'
+        })
+    }
+    
+}
+
+const obtenerPaginados = async ( req, res ) => {
+    
+    console.log( req.authUser );
+    const page = parseInt(req.params.page) || 1;
+    const pageSize = 3;
+    try {
+        const data = await obtenerPlanesPaginados( page, pageSize);
 
         res.status( 200 ).json({
             ok: true,
@@ -107,7 +130,8 @@ const updatePlanById = async ( req, res ) => {
 
 module.exports = {
     createPlan, 
-    obtenerTodos, 
+    obtenerTodos,
+    obtenerPaginados, 
     obtenerUno,
     removePlanById,
     updatePlanById

@@ -2,7 +2,8 @@ const { Router } = require( 'express' );    // Importa el Router de Express
 const router = Router();                    // Invoca el Router de Express
 
 const { authUser } = require('../middlewares/validate-user.middleware');
-const { createPlan, obtenerTodos, obtenerUno, updatePlanById, removePlanById } = require('../controllers/planes.controller');
+const { createPlan, obtenerTodos, obtenerUno, updatePlanById, removePlanById, obtenerPaginados } = require('../controllers/planes.controller');
+
 
 
 /** Definicion de rutas para products 
@@ -10,6 +11,7 @@ const { createPlan, obtenerTodos, obtenerUno, updatePlanById, removePlanById } =
 */
 router.post( '/', authUser, createPlan );              // Crea un producto
 router.get( '/', obtenerTodos );                           // Obtener todos los productos
+router.get( '/:page', obtenerPaginados )
 router.get( '/:id', obtenerUno );                     // Obtener un producto por ID
 router.delete( '/:id', authUser, removePlanById );     // Elimina producto por ID
 router.patch( '/:id', authUser, updatePlanById );      // Actualiza parcialmente

@@ -4,8 +4,15 @@ async function registrarPlan( plan ) {
     return await PlanModel.create( plan );
 }
 
-async function obtenerPlanes() {
-    return await PlanModel.find();
+async function obtenerPlanesPaginados( page, pageSize ) {
+    return await PlanModel.find()
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
+    .sort({ createdAt: -1 });
+}
+
+async function obtenerPlanes( page, pageSize ) {
+    return await PlanModel.find()
 }
 
 async function obtenerPlanPorId( id ) {
@@ -31,5 +38,6 @@ module.exports = {
     obtenerPlanes, 
     obtenerPlanPorId,
     eliminarPlanPorId, 
-    actualizarPlanPorId
+    actualizarPlanPorId,
+    obtenerPlanesPaginados
 }
