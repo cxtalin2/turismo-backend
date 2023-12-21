@@ -12,7 +12,7 @@ const { createPlan, obtenerTodos, obtenerUno, updatePlanById, removePlanById, ob
 router.post( '/', authUser, createPlan );              // Crea un producto
 router.get( '/', obtenerTodos );                           // Obtener todos los productos
 router.get( '/:page', obtenerPaginados )
-router.get( '/:id', obtenerUno );                     // Obtener un producto por ID
+router.get( '/one/:id', obtenerUno );                     // Obtener un producto por ID
 router.delete( '/:id', authUser, removePlanById );     // Elimina producto por ID
 router.patch( '/:id', authUser, updatePlanById );      // Actualiza parcialmente
 

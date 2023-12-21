@@ -11,7 +11,7 @@ async function obtenerPlanesPaginados( page, pageSize ) {
     .sort({ createdAt: -1 });
 }
 
-async function obtenerPlanes( page, pageSize ) {
+async function obtenerPlanes() {
     return await PlanModel.find()
 }
 
@@ -32,6 +32,13 @@ async function actualizarPlanPorId( id, updatePlanById ) {
     );
 }
 
+async function obtenerSiguientePlan( planSiguiente ) {
+    return await PlanModel.findOne({ createdAt: { $gt: planSiguiente.createdAt } }).sort({ createdAt: 1 }); 
+}
+
+async function obtenerPlanAnterior( planAnterior ) {
+    return await PlanModel.findOne({ createdAt: { $lt: planAnterior.createdAt } }).sort({ createdAt: -1 });
+}
 
 module.exports = {
     registrarPlan, 
@@ -39,5 +46,7 @@ module.exports = {
     obtenerPlanPorId,
     eliminarPlanPorId, 
     actualizarPlanPorId,
-    obtenerPlanesPaginados
+    obtenerPlanesPaginados,
+    obtenerSiguientePlan,
+    obtenerPlanAnterior
 }

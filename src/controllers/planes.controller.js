@@ -1,4 +1,4 @@
-const { registrarPlan, obtenerPlanes, obtenerPlanPorId, eliminarPlanPorId, actualizarPlanPorId, obtenerPlanesPaginados } = require("../services/planes.service");
+const { registrarPlan, obtenerPlanes, obtenerPlanPorId, eliminarPlanPorId, actualizarPlanPorId, obtenerPlanesPaginados, obtenerSiguientePlan, obtenerPlanAnterior } = require("../services/planes.service");
 
 
 
@@ -59,6 +59,7 @@ const obtenerPaginados = async ( req, res ) => {
     const page = parseInt(req.params.page) || 1;
     const pageSize = 2;
     try {
+        
         const data = await obtenerPlanesPaginados( page, pageSize);
 
         res.status( 200 ).json({
@@ -77,12 +78,19 @@ const obtenerPaginados = async ( req, res ) => {
 }
 
 const obtenerUno = async ( req, res ) => {
+    
     const product_id = req.params.id;
 
     try {
         const data = await obtenerPlanPorId( product_id );
+        if (!data) {
+            return res.status(404).json({ error: 'Plan no encontrado' });
+          }
 
-        res.status( 200 ).json({ ok: true, data });
+        const planSiguiente = await obtenerSiguientePlan( data )
+        const planAnterior = await obtenerPlanAnterior( data )
+        
+        res.status( 200 ).json({ ok: true, data, planSiguiente, planAnterior });
     } 
     catch ( error ) {
         console.error( error );
