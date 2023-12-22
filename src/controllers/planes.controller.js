@@ -57,7 +57,7 @@ const obtenerPaginados = async ( req, res ) => {
     
     console.log( req.authUser );
     const page = parseInt(req.params.page) || 1;
-    const pageSize = 2;
+    const pageSize = 9;
     try {
         
         const data = await obtenerPlanesPaginados( page, pageSize);
